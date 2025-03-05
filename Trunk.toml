@@ -1,0 +1,18 @@
+[build]
+# Build in release mode.
+release = false
+
+# The public URL from which assets are to be served.
+public_url = "/"
+
+# Hooks
+[[hooks]]
+stage = "pre_build"
+command = "touch"
+command_arguments = ["static/favicon.ico"]
+
+# Static files to copy to dist
+[[hooks]]
+stage = "build"
+command = "cp"
+command_arguments = ["-r", "static", "dist/"]

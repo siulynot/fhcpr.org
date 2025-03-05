@@ -1,0 +1,40 @@
+[package]
+name = "fhcpr"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+yew = { version = "0.20", features = ["csr"] }
+wasm-bindgen = "0.2"
+js-sys = "0.3"
+web-sys = { version = "0.3", features = [
+    "Document",
+    "Element",
+    "HtmlElement",
+    "Node",
+    "Window",
+    "HtmlCollection",
+    "CssStyleDeclaration",
+    "EventTarget",
+    "MouseEvent",
+    "HtmlImageElement",
+    "NodeList",
+    "DomRect",
+    "DomTokenList",
+    "HtmlDocument",
+    "console",
+    "Event",
+    "ScrollIntoViewOptions"
+] }
+gloo = "0.8"
+gloo-timers = "0.2"
+wasm-bindgen-futures = "0.4"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+yew-router = "0.17"
+
+[profile.release]
+opt-level = 'z'
+lto = true
+codegen-units = 1
+panic = 'abort'
