@@ -8,6 +8,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
       
@@ -23,7 +25,8 @@ jobs:
           
       - name: Create CNAME file
         run: |
-          echo "fhcpr.org" > static/CNAME
+          mkdir -p dist
+          echo "fhcpr.org" > dist/CNAME
           
       - name: Build
         run: |
@@ -33,3 +36,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
