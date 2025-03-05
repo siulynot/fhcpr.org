@@ -8,23 +8,26 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      
+      - uses: actions/checkout@v2
+
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
           target: wasm32-unknown-unknown
-          
+
       - name: Install Trunk
         run: |
-          cargo install --locked trunk
-          
+          cargo install trunk
+
       - name: Build
         run: |
           trunk build --release
-          
+
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
+          branch: gh-pages
           folder: dist
+~
+~
