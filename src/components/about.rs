@@ -33,6 +33,13 @@ pub fn about() -> Html {
 
             // ===== About Section =====
             <section id="sobre-nosotros" class="py-5">
+                // Decorative seal watermark
+                <img
+                    src="images/fwdfirsthomecareincbrand/Seal_White.png"
+                    alt=""
+                    aria-hidden="true"
+                    class="about-seal-watermark"
+                />
                 <div class="container">
                     <div class="row">
                         <div class="col-12 text-center mb-5">

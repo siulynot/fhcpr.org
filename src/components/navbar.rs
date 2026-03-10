@@ -68,8 +68,11 @@ pub fn navbar() -> Html {
         <nav class={classes!("navbar", "navbar-expand-lg", if *is_scrolled { "scrolled" } else { "" })}>
             <div class="container">
                 <a class="navbar-brand" href="#" onclick={scroll_to_section.clone()}>
-                    <img class="navbar-logo" src="images/logo.png" alt="First Home Care Center" />
-                    <span class="brand-text">{"First Home Care Center"}</span>
+                    <img class="navbar-logo" src="images/fwdfirsthomecareincbrand/Seal_White.png" alt="First Home Care Center" />
+                    <div class="brand-text-block">
+                        <span class="brand-text">{"First Home Care Center"}</span>
+                        <span class="brand-subtext">{"Est. 1984 · Servicios en el Hogar"}</span>
+                    </div>
                 </a>
 
                 <button

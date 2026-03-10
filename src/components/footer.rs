@@ -10,9 +10,17 @@ pub fn footer() -> Html {
                 <div class="row g-5">
                     // Brand column
                     <div class="col-lg-4 col-md-12 footer-brand">
-                        <div class="d-flex align-items-center gap-3 mb-3">
-                            <img src="images/logo.png" alt="First Home Care Center" style="height:48px;width:auto;filter:brightness(1.1);" />
-                            <h5 class="mb-0">{"First Home Care Center, Inc."}</h5>
+                        <div class="footer-logo-wrap mb-3">
+                            <img
+                                src="images/fwdfirsthomecareincbrand/Seal_Full.png"
+                                alt="First Home Care Center Seal"
+                                class="footer-seal"
+                            />
+                            <img
+                                src="images/fwdfirsthomecareincbrand/White_version.png"
+                                alt="First Home Care Center, Inc."
+                                class="footer-wordmark"
+                            />
                         </div>
                         <p class="footer-desc">
                             {"Una agencia sin fines de lucro certificada y dedicada a ofrecer servicios de salud de calidad en la comodidad de tu hogar."}
