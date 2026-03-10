@@ -152,6 +152,22 @@ img { max-width: 100%; height: auto; }
 }
 
 /* ===== Navigation ===== */
+.brand-text-block {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.brand-subtext {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.55);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1;
+}
+
+
 .navbar {
   background: rgba(9, 79, 103, 0.97) !important;
   backdrop-filter: blur(20px);
@@ -177,13 +193,14 @@ img { max-width: 100%; height: auto; }
 }
 
 .navbar-logo {
-  height: 48px;
+  height: 52px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.25));
   transition: var(--transition);
+  flex-shrink: 0;
 }
 
-.navbar.scrolled .navbar-logo { height: 40px; }
+.navbar.scrolled .navbar-logo { height: 44px; }
 
 .brand-text {
   color: var(--text-white) !important;
@@ -920,6 +937,21 @@ img { max-width: 100%; height: auto; }
   box-shadow: 0 24px 64px rgba(0,0,0,0.2);
 }
 
+/* ===== About Seal Watermark ===== */
+.about-seal-watermark {
+  position: absolute;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 480px;
+  height: 480px;
+  object-fit: contain;
+  opacity: 0.045;
+  pointer-events: none;
+  user-select: none;
+  filter: brightness(10);
+}
+
 /* ===== Footer ===== */
 footer {
   background: var(--dark);
@@ -937,6 +969,38 @@ footer::before {
   height: 3px;
   background: var(--gradient-primary);
 }
+
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-seal {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 4px 12px rgba(76,170,197,0.35));
+  transition: var(--transition);
+}
+
+.footer-seal:hover {
+  transform: scale(1.06) rotate(3deg);
+  filter: drop-shadow(0 6px 18px rgba(76,170,197,0.5));
+}
+
+.footer-wordmark {
+  /* White version PNG — visible on dark footer background */
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  opacity: 0.9;
+  filter: brightness(1) drop-shadow(0 1px 3px rgba(0,0,0,0.3));
+  transition: var(--transition);
+}
+
+.footer-wordmark:hover { opacity: 1; }
 
 .footer-brand h5 {
   font-size: 1.0625rem;
@@ -1170,8 +1234,12 @@ footer hr {
 @media (max-width: 768px) {
   html { scroll-padding-top: 72px; }
 
-  .navbar-logo { height: 40px; }
+  .navbar-logo { height: 42px; }
   .brand-text  { font-size: 0.9375rem; }
+  .brand-subtext { display: none; }
+  .footer-wordmark { height: 36px; }
+  .footer-seal { width: 60px; height: 60px; }
+  .about-seal-watermark { width: 320px; height: 320px; right: -40px; }
 
   .carousel-inner .carousel-item img {
     height: 60vh;
