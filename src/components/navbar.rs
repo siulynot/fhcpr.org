@@ -71,7 +71,7 @@ pub fn navbar() -> Html {
                     <img class="navbar-logo" src="images/fwdfirsthomecareincbrand/Seal_White.png" alt="First Home Care Center" />
                     <div class="brand-text-block">
                         <span class="brand-text">{"First Home Care Center"}</span>
-                        <span class="brand-subtext">{"Est. 1984 · Servicios en el Hogar"}</span>
+                        <span class="brand-subtext">{"Servicios de Salud en el Hogar"}</span>
                     </div>
                 </a>
 

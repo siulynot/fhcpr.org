@@ -1236,7 +1236,7 @@ footer hr {
 
   .navbar-logo { height: 42px; }
   .brand-text  { font-size: 0.9375rem; }
-  .brand-subtext { display: none; }
+  .brand-subtext { font-size: 0.6rem; }
   .footer-wordmark { height: 36px; }
   .footer-seal { width: 60px; height: 60px; }
   .about-seal-watermark { width: 320px; height: 320px; right: -40px; }
