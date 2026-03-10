@@ -12,50 +12,42 @@ use wasm_bindgen::{JsCast, closure::Closure};
 #[function_component(Home)]
 pub fn home() -> Html {
     let show_scroll_button = use_state(|| false);
-    
-    // Handle animation on page load and scroll
+
     {
         let show_button = show_scroll_button.clone();
-        
+
         use_effect_with_deps(move |_| {
-            let window = window().expect("window not available");
-            let document = window.document().expect("document not available");
-            
-            // Create closure for handling scroll to update button visibility
+            let win = window().expect("window not available");
+            let doc = win.document().expect("document not available");
+
+            // Scroll-to-top button visibility
+            let show_btn = show_button.clone();
             let check_scroll = {
-                let window = window.clone();
-                let show_button = show_button.clone();
-                
+                let w = win.clone();
                 Closure::wrap(Box::new(move |_: web_sys::Event| {
-                    let scroll_top = window.scroll_y().unwrap_or(0.0);
-                    show_button.set(scroll_top > 300.0);
+                    let y = w.scroll_y().unwrap_or(0.0);
+                    show_btn.set(y > 300.0);
                 }) as Box<dyn FnMut(web_sys::Event)>)
             };
-            
-            // Add event listener for button visibility
-            document.add_event_listener_with_callback(
-                "scroll", 
-                check_scroll.as_ref().unchecked_ref()
-            ).expect("Failed to add scroll event listener");
-            
-            // Create closure for handling animations on scroll
+
+            doc.add_event_listener_with_callback(
+                "scroll",
+                check_scroll.as_ref().unchecked_ref(),
+            ).expect("Failed to add scroll listener");
+
+            // Scroll-reveal animations
             let handle_animations = {
-                let window = window.clone();
-                
+                let w = win.clone();
                 Closure::wrap(Box::new(move |_: web_sys::Event| {
-                    if let Some(document) = window.document() {
+                    if let Some(document) = w.document() {
                         if let Ok(elements) = document.query_selector_all(".animate-on-scroll") {
-                            let window_height = window.inner_height().unwrap().as_f64().unwrap_or(0.0);
-                            
+                            let wh = w.inner_height().unwrap().as_f64().unwrap_or(0.0);
                             for i in 0..elements.length() {
                                 if let Some(node) = elements.get(i) {
-                                    // Cast Node to Element to access Element-specific methods
-                                    if let Some(element) = node.dyn_ref::<web_sys::Element>() {
-                                        let rect = element.get_bounding_client_rect();
-                                        let position_from_top = rect.top();
-                                        
-                                        if position_from_top - window_height <= 0.0 {
-                                            let _ = element.class_list().add_1("fade-in-element");
+                                    if let Some(el) = node.dyn_ref::<web_sys::Element>() {
+                                        let rect = el.get_bounding_client_rect();
+                                        if rect.top() - wh <= 40.0 {
+                                            let _ = el.class_list().add_1("fade-in-element");
                                         }
                                     }
                                 }
@@ -64,30 +56,24 @@ pub fn home() -> Html {
                     }
                 }) as Box<dyn FnMut(web_sys::Event)>)
             };
-            
-            // Add event listener for animations
-            document.add_event_listener_with_callback(
-                "scroll", 
-                handle_animations.as_ref().unchecked_ref()
-            ).expect("Failed to add animation scroll event listener");
-            
-            // Check elements in viewport on page load
-            let window_clone = window.clone();
-            let timeout = Timeout::new(100, move || {
-                // Manually trigger animation check
-                if let Some(document) = window_clone.document() {
+
+            doc.add_event_listener_with_callback(
+                "scroll",
+                handle_animations.as_ref().unchecked_ref(),
+            ).expect("Failed to add animation listener");
+
+            // Trigger on load after short delay
+            let wc = win.clone();
+            let timeout = Timeout::new(120, move || {
+                if let Some(document) = wc.document() {
                     if let Ok(elements) = document.query_selector_all(".animate-on-scroll") {
-                        let window_height = window_clone.inner_height().unwrap().as_f64().unwrap_or(0.0);
-                        
+                        let wh = wc.inner_height().unwrap().as_f64().unwrap_or(0.0);
                         for i in 0..elements.length() {
                             if let Some(node) = elements.get(i) {
-                                // Cast Node to Element to access Element-specific methods
-                                if let Some(element) = node.dyn_ref::<web_sys::Element>() {
-                                    let rect = element.get_bounding_client_rect();
-                                    let position_from_top = rect.top();
-                                    
-                                    if position_from_top - window_height <= 0.0 {
-                                        let _ = element.class_list().add_1("fade-in-element");
+                                if let Some(el) = node.dyn_ref::<web_sys::Element>() {
+                                    let rect = el.get_bounding_client_rect();
+                                    if rect.top() - wh <= 40.0 {
+                                        let _ = el.class_list().add_1("fade-in-element");
                                     }
                                 }
                             }
@@ -95,33 +81,27 @@ pub fn home() -> Html {
                     }
                 }
             });
-            
-            // Cleanup when component unmounts
+
             move || {
-                // Remove event listeners
-                let _ = document.remove_event_listener_with_callback(
-                    "scroll", 
-                    check_scroll.as_ref().unchecked_ref()
+                let _ = doc.remove_event_listener_with_callback(
+                    "scroll",
+                    check_scroll.as_ref().unchecked_ref(),
                 );
-                
-                let _ = document.remove_event_listener_with_callback(
-                    "scroll", 
-                    handle_animations.as_ref().unchecked_ref()
+                let _ = doc.remove_event_listener_with_callback(
+                    "scroll",
+                    handle_animations.as_ref().unchecked_ref(),
                 );
-                
-                // Keep closures alive for the lifetime of the component
                 drop(check_scroll);
                 drop(handle_animations);
                 drop(timeout);
             }
         }, ());
     }
-    
-    // Handle scroll to top button click
+
     let scroll_to_top = Callback::from(move |e: MouseEvent| {
         e.prevent_default();
-        if let Some(window) = window() {
-            window.scroll_to_with_x_and_y(0.0, 0.0);
+        if let Some(win) = window() {
+            win.scroll_to_with_x_and_y(0.0, 0.0);
         }
     });
 
@@ -130,18 +110,58 @@ pub fn home() -> Html {
             <Navbar />
             <main>
                 <Carousel />
+
+                // Trust bar under hero
+                <div class="trust-bar">
+                    <div class="container">
+                        <div class="trust-bar-inner">
+                            <div class="trust-bar-item">
+                                <div class="trust-icon"><i class="bi bi-patch-check-fill"></i></div>
+                                <span>{"Certificados por el Dept. de Salud PR"}</span>
+                            </div>
+                            <div class="trust-divider"></div>
+                            <div class="trust-bar-item">
+                                <div class="trust-icon"><i class="bi bi-shield-fill-check"></i></div>
+                                <span>{"Proveedor Certificado de Medicare"}</span>
+                            </div>
+                            <div class="trust-divider"></div>
+                            <div class="trust-bar-item">
+                                <div class="trust-icon"><i class="bi bi-house-heart-fill"></i></div>
+                                <span>{"Agencia Sin Fines de Lucro"}</span>
+                            </div>
+                            <div class="trust-divider"></div>
+                            <div class="trust-bar-item">
+                                <div class="trust-icon"><i class="bi bi-geo-alt-fill"></i></div>
+                                <span>{"Servicio en 42 Municipios"}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <Services />
                 <Requirements />
                 <About />
             </main>
             <Footer />
-            
-            // Scroll to top button
+
+            // WhatsApp FAB
+            <a
+                href="https://wa.me/17878342295"
+                class="whatsapp-fab"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Contactar por WhatsApp"
+                title="Contáctanos por WhatsApp"
+            >
+                <i class="bi bi-whatsapp"></i>
+            </a>
+
+            // Scroll-to-top button
             if *show_scroll_button {
-                <button 
-                    class="scroll-to-top" 
+                <button
+                    class="scroll-to-top"
                     onclick={scroll_to_top}
-                    aria-label="Scroll to top"
+                    aria-label="Volver arriba"
                 >
                     {"↑"}
                 </button>

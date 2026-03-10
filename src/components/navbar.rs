@@ -1,11 +1,35 @@
 use yew::prelude::*;
 use web_sys::window;
-use wasm_bindgen::JsCast;
+use wasm_bindgen::{JsCast, closure::Closure};
 
 #[function_component(Navbar)]
 pub fn navbar() -> Html {
     let show_menu = use_state(|| false);
-    
+    let is_scrolled = use_state(|| false);
+
+    // Detect scroll to apply .scrolled class
+    {
+        let is_scrolled = is_scrolled.clone();
+        use_effect_with_deps(move |_| {
+            let win = window().expect("window not available");
+            let is_scrolled_c = is_scrolled.clone();
+
+            let on_scroll = Closure::wrap(Box::new(move |_: web_sys::Event| {
+                if let Some(w) = window() {
+                    let y = w.scroll_y().unwrap_or(0.0);
+                    is_scrolled_c.set(y > 60.0);
+                }
+            }) as Box<dyn FnMut(web_sys::Event)>);
+
+            win.add_event_listener_with_callback(
+                "scroll",
+                on_scroll.as_ref().unchecked_ref(),
+            ).ok();
+
+            move || { drop(on_scroll); }
+        }, ());
+    }
+
     let toggle_menu = {
         let show_menu = show_menu.clone();
         Callback::from(move |e: MouseEvent| {
@@ -13,25 +37,24 @@ pub fn navbar() -> Html {
             show_menu.set(!*show_menu);
         })
     };
-    
+
     let scroll_to_section = {
         let show_menu = show_menu.clone();
         Callback::from(move |e: MouseEvent| {
             e.prevent_default();
-            
             if let Some(target) = e.target() {
                 if let Some(anchor) = target.dyn_ref::<web_sys::Element>() {
                     if let Some(href) = anchor.get_attribute("href") {
-                        if href.starts_with("#") {
-                            let section_id = href.strip_prefix("#").unwrap_or_default();
-                            if let Some(window) = window() {
-                                if let Some(document) = window.document() {
-                                    if let Ok(Some(section)) = document.query_selector(&format!("#{}", section_id)) {
-                                        section.scroll_into_view();
-                                        
-                                        // Close mobile menu if open
-                                        show_menu.set(false);
+                        if href.starts_with('#') {
+                            let id = href.strip_prefix('#').unwrap_or_default();
+                            if let Some(win) = window() {
+                                if let Some(doc) = win.document() {
+                                    if id.is_empty() {
+                                        win.scroll_to_with_x_and_y(0.0, 0.0);
+                                    } else if let Ok(Some(el)) = doc.query_selector(&format!("#{}", id)) {
+                                        el.scroll_into_view();
                                     }
+                                    show_menu.set(false);
                                 }
                             }
                         }
@@ -40,26 +63,26 @@ pub fn navbar() -> Html {
             }
         })
     };
-    
+
     html! {
-        <nav class="navbar navbar-expand-lg">
+        <nav class={classes!("navbar", "navbar-expand-lg", if *is_scrolled { "scrolled" } else { "" })}>
             <div class="container">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="#" onclick={scroll_to_section.clone()}>
                     <img class="navbar-logo" src="images/logo.png" alt="First Home Care Center" />
                     <span class="brand-text">{"First Home Care Center"}</span>
                 </a>
-                
-                <button 
-                    class="navbar-toggler" 
-                    type="button" 
-                    aria-controls="navbarNav" 
-                    aria-expanded="false" 
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    aria-controls="navbarNav"
+                    aria-expanded={if *show_menu { "true" } else { "false" }}
                     aria-label="Toggle navigation"
                     onclick={toggle_menu}
                 >
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                
+
                 <div class={classes!("collapse", "navbar-collapse", if *show_menu { "show" } else { "" })} id="navbarNav">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
