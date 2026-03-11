@@ -561,6 +561,224 @@ img { max-width: 100%; height: auto; }
 
 .requirements-section { color: var(--text-primary); }
 
+/* Answer cards — 3-column layout */
+.answer-card {
+  background: var(--bg-white);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--gray-200);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.answer-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition);
+}
+
+.answer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.answer-card:hover::after { transform: scaleX(1); }
+
+/* Featured (middle) card */
+.answer-card--featured {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: white;
+}
+
+.answer-card--featured::after { display: none; }
+.answer-card--featured:hover { box-shadow: 0 20px 48px rgba(13,110,142,0.35); }
+
+.answer-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.answer-card-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.answer-card--featured .answer-card-title { color: white; }
+
+/* Checklist */
+.answer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  flex: 1;
+}
+
+.answer-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.answer-list li .bi {
+  color: var(--teal);
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.answer-card--featured .answer-list li { color: rgba(255,255,255,0.9); }
+.answer-card--featured .answer-list li .bi { color: rgba(255,255,255,0.7); }
+
+/* Footer note inside card */
+.answer-card-footer {
+  font-size: 0.8125rem;
+  color: var(--text-light);
+  background: var(--bg-tint);
+  border-radius: var(--border-radius-sm);
+  padding: 0.75rem 1rem;
+  line-height: 1.5;
+  margin-top: auto;
+}
+
+.answer-card-footer .bi { color: var(--primary); }
+
+.answer-card-footer--light {
+  background: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.85);
+}
+
+.answer-card-footer--light .bi { color: rgba(255,255,255,0.8); }
+
+/* Numbered steps inside card 3 */
+.answer-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+.answer-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+}
+
+.answer-step-num {
+  width: 28px;
+  height: 28px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 800;
+  font-size: 0.8125rem;
+  font-family: var(--font-display);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.answer-step strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.answer-step p {
+  font-size: 0.8375rem;
+  color: var(--text-light);
+  margin: 0;
+  line-height: 1.45;
+}
+
+.answer-card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  background: var(--gradient-primary);
+  color: white;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: var(--transition);
+  text-decoration: none;
+  margin-top: auto;
+}
+
+.answer-card-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  color: white;
+}
+
+/* Divider label (insurance & region headings) */
+.req-divider-section {
+  background: var(--bg-white);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  border: 1px solid var(--gray-200);
+}
+
+.req-divider-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--primary);
+  margin-bottom: 1.5rem;
+}
+
+.req-divider-label .bi { font-size: 1rem; }
+
+/* Region card */
+.req-region-card {
+  background: var(--bg-white);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--gray-200);
+  padding: 1.75rem;
+  transition: var(--transition);
+}
+
+.req-region-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--primary-ultra-light);
+  transform: translateY(-3px);
+}
+
 .process-card {
   background: var(--bg-white);
   border-radius: var(--border-radius);
