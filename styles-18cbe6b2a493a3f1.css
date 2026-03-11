@@ -245,7 +245,9 @@ img { max-width: 100%; height: auto; }
   transition: var(--transition) !important;
 }
 
-.nav-login-btn:hover {
+/* Higher specificity to beat .navbar-nav .nav-link:hover !important */
+.navbar-nav .nav-link.nav-login-btn:hover,
+.navbar-nav .nav-link.nav-login-btn:focus {
   background: white !important;
   color: var(--primary-dark) !important;
   border-color: white !important;
