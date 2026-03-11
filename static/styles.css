@@ -8,20 +8,20 @@
 
 /* ===== Design Tokens ===== */
 :root {
-  /* Brand Colors — Ocean Care */
-  --primary:            #0D6E8E;
-  --primary-dark:       #094F67;
-  --primary-light:      #4CAAC5;
-  --primary-ultra-light:#D6EFF5;
+  /* Brand Colors — First Home Care */
+  --primary:            #1794d3;
+  --primary-dark:       #174972;
+  --primary-light:      #4DB5E8;
+  --primary-ultra-light:#D0EAF7;
 
-  /* Accent */
-  --teal:               #0BA898;
-  --teal-light:         #4DD4C9;
+  /* Accent — bright cyan complement */
+  --teal:               #0FBAD6;
+  --teal-light:         #5DD5F0;
   --green:              #27B589;
 
   /* Neutrals */
-  --dark:               #1C2B3A;
-  --dark-2:             #2D3E50;
+  --dark:               #0E2140;
+  --dark-2:             #1A3254;
   --gray-600:           #4A5568;
   --gray-400:           #A0AEC0;
   --gray-200:           #E2E8F0;
@@ -29,27 +29,27 @@
 
   /* Backgrounds */
   --bg-white:           #FFFFFF;
-  --bg-light:           #F6FBFC;
-  --bg-tint:            #EBF8F5;
-  --bg-section-alt:     #F0F8FC;
+  --bg-light:           #F5FAFE;
+  --bg-tint:            #E8F4FC;
+  --bg-section-alt:     #EEF6FB;
 
   /* Text */
-  --text-primary:       #1C2B3A;
-  --text-secondary:     #4A5568;
-  --text-light:         #718096;
+  --text-primary:       #0E2140;
+  --text-secondary:     #3A5068;
+  --text-light:         #6B8199;
   --text-white:         #FFFFFF;
 
   /* Gradients */
-  --gradient-primary:   linear-gradient(135deg, #0D6E8E 0%, #0BA898 100%);
-  --gradient-light:     linear-gradient(135deg, #4CAAC5 0%, #4DD4C9 100%);
-  --gradient-hero:      linear-gradient(135deg, rgba(13,110,142,0.88) 0%, rgba(11,168,152,0.78) 100%);
-  --gradient-dark:      linear-gradient(135deg, #1C2B3A 0%, #0D6E8E 100%);
+  --gradient-primary:   linear-gradient(135deg, #174972 0%, #1794d3 100%);
+  --gradient-light:     linear-gradient(135deg, #1794d3 0%, #4DB5E8 100%);
+  --gradient-hero:      linear-gradient(135deg, rgba(23,73,114,0.88) 0%, rgba(23,148,211,0.72) 100%);
+  --gradient-dark:      linear-gradient(135deg, #0E2140 0%, #174972 100%);
 
   /* Shadows */
-  --shadow-sm:          0 2px 8px rgba(13, 110, 142, 0.08);
-  --shadow-md:          0 8px 24px rgba(13, 110, 142, 0.12);
-  --shadow-lg:          0 20px 48px rgba(13, 110, 142, 0.16);
-  --shadow-xl:          0 32px 64px rgba(13, 110, 142, 0.20);
+  --shadow-sm:          0 2px 8px rgba(23, 73, 114, 0.08);
+  --shadow-md:          0 8px 24px rgba(23, 73, 114, 0.13);
+  --shadow-lg:          0 20px 48px rgba(23, 73, 114, 0.18);
+  --shadow-xl:          0 32px 64px rgba(23, 73, 114, 0.22);
 
   /* Layout */
   --border-radius-sm:   8px;
@@ -148,7 +148,7 @@ img { max-width: 100%; height: auto; }
   text-transform: uppercase;
   letter-spacing: 0.1em;
   margin-bottom: 1rem;
-  border: 1px solid rgba(11,168,152,0.25);
+  border: 1px solid rgba(23,148,211,0.25);
 }
 
 /* ===== Navigation ===== */
@@ -169,7 +169,7 @@ img { max-width: 100%; height: auto; }
 
 
 .navbar {
-  background: rgba(9, 79, 103, 0.97) !important;
+  background: rgba(23, 73, 114, 0.97) !important;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 0 1px 0 rgba(255,255,255,0.08), 0 4px 24px rgba(0,0,0,0.18);
@@ -182,7 +182,7 @@ img { max-width: 100%; height: auto; }
 
 .navbar.scrolled {
   padding: 0.5rem 1rem;
-  background: rgba(9, 79, 103, 0.99) !important;
+  background: rgba(23, 73, 114, 0.99) !important;
   box-shadow: 0 4px 32px rgba(0,0,0,0.25);
 }
 
@@ -267,10 +267,10 @@ img { max-width: 100%; height: auto; }
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(7, 40, 65, 0.92) 0%,
-    rgba(7, 40, 65, 0.55) 30%,
-    rgba(7, 40, 65, 0.10) 55%,
-    transparent 75%
+    rgba(14, 33, 64, 0.94) 0%,
+    rgba(14, 33, 64, 0.58) 32%,
+    rgba(14, 33, 64, 0.12) 58%,
+    transparent 78%
   );
   pointer-events: none;
   z-index: 1;
@@ -1458,7 +1458,7 @@ footer hr {
 /* ===== Responsive ===== */
 @media (max-width: 992px) {
   .navbar-collapse {
-    background: rgba(9, 79, 103, 0.98);
+    background: rgba(23, 73, 114, 0.98);
     backdrop-filter: blur(20px);
     padding: 0.875rem;
     border-radius: 0 0 var(--border-radius) var(--border-radius);
