@@ -103,6 +103,17 @@ pub fn navbar() -> Html {
                         <li class="nav-item">
                             <a class="nav-link" href="#contacto" onclick={scroll_to_section.clone()}>{"Contacto"}</a>
                         </li>
+                        <li class="nav-item ms-lg-2">
+                            <a
+                                class="nav-link nav-login-btn"
+                                href="https://medreq.fhcpr.org"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <i class="bi bi-person-badge-fill me-1"></i>
+                                {"Portal Empleados"}
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
