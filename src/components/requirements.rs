@@ -11,18 +11,14 @@ struct RegionCardProps {
 fn region_card(props: &RegionCardProps) -> Html {
     html! {
         <div class="col-md-4 mb-4">
-            <div class="card shadow-sm h-100" style="border-radius:var(--border-radius); border:1px solid var(--gray-200); overflow:hidden; transition:var(--transition);">
-                <div class="card-body" style="padding:1.75rem;">
-                    <h4 class="region-title">
-                        <i class={props.icon.clone()}></i>
-                        {&props.title}
-                    </h4>
-                    <ul class="region-list">
-                        {props.cities.iter().map(|city| {
-                            html! { <li>{city}</li> }
-                        }).collect::<Html>()}
-                    </ul>
-                </div>
+            <div class="req-region-card h-100">
+                <h4 class="region-title">
+                    <i class={props.icon.clone()}></i>
+                    {&props.title}
+                </h4>
+                <ul class="region-list">
+                    {props.cities.iter().map(|city| html! { <li>{city}</li> }).collect::<Html>()}
+                </ul>
             </div>
         </div>
     }
@@ -76,148 +72,153 @@ pub fn requirements() -> Html {
     html! {
         <div id="requisitos">
             <div class="container requirements-section animate-on-scroll">
+
+                // Section header
                 <div class="text-center mb-5">
                     <span class="section-badge">
                         <i class="bi bi-shield-check-fill"></i>
                         {"Elegibilidad y Cobertura"}
                     </span>
-                    <h2 class="section-title">{"Requisitos"}</h2>
+                    <h2 class="section-title">{"¿Cómo Funciona?"}</h2>
+                    <p class="section-subtitle">
+                        {"Todo lo que necesitas saber para empezar a recibir atención médica en tu hogar."}
+                    </p>
                 </div>
 
-                // Certification intro
-                <div class="process-card mb-5">
-                    <div class="card-body">
-                        <h3 class="sub-heading mb-3">
-                            <i class="bi bi-award-fill me-2" style="color:var(--teal);"></i>
-                            {"Servicios de Salud en el Hogar"}
-                        </h3>
-                        <p class="lead mb-0" style="color:var(--text-secondary);">
-                            {r#"First Home Care Center, Inc. es una agencia sin fines de lucro certificada por el Departamento de Salud del Estado Libre Asociado de Puerto Rico y por el Seguro Social Federal. Nuestro propósito es proveer servicios de salud de calidad en el hogar o lugar de residencia a pacientes beneficiarios de "Medicare" y "Medicare Advantage", que cumplan con los requisitos establecidos."#}
-                        </p>
+                // ── 3-column answer cards ──────────────────────────────
+                <div class="row g-4 mb-5">
+
+                    // Card 1 — Who qualifies
+                    <div class="col-lg-4 animate-on-scroll stagger-1">
+                        <div class="answer-card h-100">
+                            <div class="answer-card-icon" style="background:linear-gradient(135deg,#D6EFF5,#EBF8F5);">
+                                <i class="bi bi-person-check-fill" style="color:var(--primary);"></i>
+                            </div>
+                            <h3 class="answer-card-title">{"¿Quién Califica?"}</h3>
+                            <ul class="answer-list">
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Beneficiarios de Medicare (Original)"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Beneficiarios de Medicare Advantage"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Pacientes con referido de su médico"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Residentes en nuestras áreas de servicio"}
+                                </li>
+                            </ul>
+                            <div class="answer-card-footer">
+                                <i class="bi bi-info-circle me-1"></i>
+                                {"Tu médico determina si calificas durante tu próxima visita."}
+                            </div>
+                        </div>
+                    </div>
+
+                    // Card 2 — What's covered
+                    <div class="col-lg-4 animate-on-scroll stagger-2">
+                        <div class="answer-card answer-card--featured h-100">
+                            <div class="answer-card-icon" style="background:rgba(255,255,255,0.2);">
+                                <i class="bi bi-heart-pulse-fill" style="color:white;"></i>
+                            </div>
+                            <h3 class="answer-card-title">{"¿Qué Cubre Tu Seguro?"}</h3>
+                            <ul class="answer-list">
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Enfermería Profesional"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Terapia Física, Ocupacional y del Habla"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Trabajo Médico Social"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Consultoría de Nutrición"}
+                                </li>
+                                <li>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    {"Asistencia de Salud en el Hogar"}
+                                </li>
+                            </ul>
+                            <div class="answer-card-footer answer-card-footer--light">
+                                <i class="bi bi-shield-fill-check me-1"></i>
+                                {"Sin costo adicional para ti — facturamos directamente a tu plan."}
+                            </div>
+                        </div>
+                    </div>
+
+                    // Card 3 — How to start
+                    <div class="col-lg-4 animate-on-scroll stagger-3">
+                        <div class="answer-card h-100">
+                            <div class="answer-card-icon" style="background:linear-gradient(135deg,#D6EFF5,#EBF8F5);">
+                                <i class="bi bi-play-circle-fill" style="color:var(--primary);"></i>
+                            </div>
+                            <h3 class="answer-card-title">{"¿Cómo Empezar?"}</h3>
+                            <div class="answer-steps">
+                                <div class="answer-step">
+                                    <div class="answer-step-num">{"1"}</div>
+                                    <div>
+                                        <strong>{"Habla con tu médico"}</strong>
+                                        <p>{"Pídele que te refiera a First Home Care Center."}</p>
+                                    </div>
+                                </div>
+                                <div class="answer-step">
+                                    <div class="answer-step-num">{"2"}</div>
+                                    <div>
+                                        <strong>{"Recibe una evaluación"}</strong>
+                                        <p>{"Te visitamos en casa para confirmar tu elegibilidad."}</p>
+                                    </div>
+                                </div>
+                                <div class="answer-step">
+                                    <div class="answer-step-num">{"3"}</div>
+                                    <div>
+                                        <strong>{"Comienza tu cuidado"}</strong>
+                                        <p>{"Nuestro equipo empieza a visitarte en tu hogar."}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#contacto" class="answer-card-cta">
+                                <i class="bi bi-telephone-fill me-2"></i>{"Contáctanos"}
+                            </a>
+                        </div>
                     </div>
                 </div>
 
-                // How to get services — step cards
-                <section class="mb-5">
-                    <h3 class="sub-heading mb-4">{"¿Cómo obtener nuestros servicios?"}</h3>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3 border h-100" style="border-color:var(--gray-200) !important; transition:var(--transition);">
-                                <div style="width:44px;height:44px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.1rem;flex-shrink:0;font-family:var(--font-display);">
-                                    {"1"}
-                                </div>
-                                <div>
-                                    <h5 style="font-size:0.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:0.375rem;">{"Referido Médico"}</h5>
-                                    <p style="font-size:0.875rem;margin:0;">{"Su médico de cabecera lo refiere a nuestra agencia si considera que amerita cualquiera de nuestros servicios."}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3 border h-100" style="border-color:var(--gray-200) !important; transition:var(--transition);">
-                                <div style="width:44px;height:44px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.1rem;flex-shrink:0;font-family:var(--font-display);">
-                                    {"2"}
-                                </div>
-                                <div>
-                                    <h5 style="font-size:0.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:0.375rem;">{"Evaluación Inicial"}</h5>
-                                    <p style="font-size:0.875rem;margin:0;">{"La agencia realiza una visita de evaluación para determinar si es elegible para nuestros servicios y suple los formularios necesarios."}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="d-flex align-items-start gap-3 p-3 bg-white rounded-3 border h-100" style="border-color:var(--gray-200) !important; transition:var(--transition);">
-                                <div style="width:44px;height:44px;background:var(--gradient-primary);border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:1.1rem;flex-shrink:0;font-family:var(--font-display);">
-                                    {"3"}
-                                </div>
-                                <div>
-                                    <h5 style="font-size:0.9375rem;font-weight:700;color:var(--text-primary);margin-bottom:0.375rem;">{"Inicio de Servicios"}</h5>
-                                    <p style="font-size:0.875rem;margin:0;">{r#"Para calificar, debe cumplir con los requisitos de CMS. En casos de "Medicare Advantage" se solicita aprobación del plan médico."#}</p>
-                                </div>
-                            </div>
-                        </div>
+                // ── Insurance logos ────────────────────────────────────
+                <div class="req-divider-section animate-on-scroll">
+                    <div class="req-divider-label">
+                        <i class="bi bi-credit-card-2-front-fill"></i>
+                        {"Planes médicos que aceptamos"}
                     </div>
-                </section>
-
-                // Services offered
-                <section class="mb-5">
-                    <div class="process-card">
-                        <div class="card-body">
-                            <h3 class="sub-heading mb-3">
-                                <i class="bi bi-list-check me-2" style="color:var(--teal);"></i>
-                                {"¿Qué servicios ofrecemos?"}
-                            </h3>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ul style="list-style:none;padding:0;margin:0;">
-                                        <li class="d-flex align-items-center gap-2 mb-2" style="font-size:0.9375rem;color:var(--text-secondary);">
-                                            <span style="width:8px;height:8px;border-radius:50%;background:var(--gradient-primary);flex-shrink:0;"></span>
-                                            {"Enfermería Profesional"}
-                                        </li>
-                                        <li class="d-flex align-items-center gap-2 mb-2" style="font-size:0.9375rem;color:var(--text-secondary);">
-                                            <span style="width:8px;height:8px;border-radius:50%;background:var(--gradient-primary);flex-shrink:0;"></span>
-                                            {"Asistencia de Salud"}
-                                        </li>
-                                        <li class="d-flex align-items-center gap-2 mb-2" style="font-size:0.9375rem;color:var(--text-secondary);">
-                                            <span style="width:8px;height:8px;border-radius:50%;background:var(--gradient-primary);flex-shrink:0;"></span>
-                                            {"Terapia Física, Ocupacional y del Habla"}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <ul style="list-style:none;padding:0;margin:0;">
-                                        <li class="d-flex align-items-center gap-2 mb-2" style="font-size:0.9375rem;color:var(--text-secondary);">
-                                            <span style="width:8px;height:8px;border-radius:50%;background:var(--gradient-primary);flex-shrink:0;"></span>
-                                            {"Trabajo Médico Social"}
-                                        </li>
-                                        <li class="d-flex align-items-center gap-2 mb-2" style="font-size:0.9375rem;color:var(--text-secondary);">
-                                            <span style="width:8px;height:8px;border-radius:50%;background:var(--gradient-primary);flex-shrink:0;"></span>
-                                            {"Consultoría de Nutrición"}
-                                        </li>
-                                        <li class="d-flex align-items-center gap-2 mb-2" style="font-size:0.9375rem;color:var(--text-secondary);">
-                                            <span style="width:8px;height:8px;border-radius:50%;background:var(--gradient-primary);flex-shrink:0;"></span>
-                                            {"Coordinación de Equipo Médico"}
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                // Insurance section
-                <section class="mb-5">
-                    <h3 class="sub-heading mb-3">
-                        <i class="bi bi-credit-card-2-front-fill me-2" style="color:var(--teal);"></i>
-                        {"¿Quién paga por nuestros servicios?"}
-                    </h3>
-                    <div class="process-card mb-4">
-                        <div class="card-body">
-                            <p class="mb-0" style="color:var(--text-secondary);">
-                                {r#"Cualquiera de los planes "Medicare" o "Medicare Advantage" pagan o ayudan a pagar los servicios ofrecidos a sus beneficiarios. Nosotros nos encargamos de facturar directamente a estos planes."#}
-                            </p>
-                        </div>
-                    </div>
-                    <h4 class="sub-heading mb-3" style="font-size:1rem;">{"Planes médicos aceptados:"}</h4>
                     <div class="insurance-grid">
-                        {insurances.into_iter().map(|(logo, name)| {
-                            html! {
-                                <InsuranceCard logo={logo.to_string()} name={name.to_string()} />
-                            }
+                        {insurances.into_iter().map(|(logo, name)| html! {
+                            <InsuranceCard logo={logo.to_string()} name={name.to_string()} />
                         }).collect::<Html>()}
                     </div>
-                </section>
+                </div>
 
-                // Coverage regions
-                <section>
-                    <h3 class="sub-heading mb-4">
-                        <i class="bi bi-geo-alt-fill me-2" style="color:var(--teal);"></i>
-                        {"Áreas de Cobertura"}
-                    </h3>
+                // ── Coverage regions ───────────────────────────────────
+                <div class="animate-on-scroll mt-5">
+                    <div class="req-divider-label mb-4">
+                        <i class="bi bi-geo-alt-fill"></i>
+                        {"Ofrecemos servicios en 42 municipios de Puerto Rico"}
+                    </div>
                     <div class="row">
                         <RegionCard title={"Región Oeste".to_string()} icon={"bi bi-compass-fill".to_string()} cities={oeste} />
                         <RegionCard title={"Región Sur".to_string()}  icon={"bi bi-sun-fill".to_string()}     cities={sur}   />
                         <RegionCard title={"Región Norte".to_string()} icon={"bi bi-cloud-fill".to_string()}  cities={norte} />
                     </div>
-                </section>
+                </div>
+
             </div>
         </div>
     }
