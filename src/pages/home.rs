@@ -5,6 +5,7 @@ use crate::components::services::Services;
 use crate::components::requirements::Requirements;
 use crate::components::about::About;
 use crate::components::footer::Footer;
+use crate::components::medicare_ratings::MedicareRatings;
 use web_sys::window;
 use gloo::timers::callback::Timeout;
 use wasm_bindgen::{JsCast, closure::Closure};
@@ -138,6 +139,7 @@ pub fn home() -> Html {
                     </div>
                 </div>
 
+                <MedicareRatings />
                 <Services />
                 <Requirements />
                 <About />

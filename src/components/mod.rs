@@ -4,3 +4,4 @@ pub mod services;
 pub mod requirements;
 pub mod about;
 pub mod footer;
+pub mod medicare_ratings;
