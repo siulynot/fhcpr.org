@@ -1562,3 +1562,317 @@ footer hr {
 
   .about-card-inner { padding: 1.75rem; }
 }
+
+/* ════════════════════════════════════════════════════════════════════════
+ * Medicare Care Compare Ratings Section
+ * ════════════════════════════════════════════════════════════════════════ */
+
+.medicare-ratings-section {
+  padding: 5rem 0 4rem;
+  background:
+    radial-gradient(ellipse at top, rgba(23,148,211,0.06) 0%, transparent 50%),
+    var(--bg-light);
+  position: relative;
+}
+
+.medicare-ratings-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gray-200), transparent);
+}
+
+/* ── Rating cards ─────────────────────────────────────────────────────── */
+.mc-rating-card {
+  background: var(--bg-white);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-200);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.mc-rating-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.mc-rating-card--survey::before {
+  background: linear-gradient(135deg, var(--teal), var(--primary-light));
+}
+
+.mc-rating-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(23, 73, 114, 0.18);
+}
+
+.mc-rating-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.mc-rating-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  background: var(--gradient-primary);
+  box-shadow: 0 6px 16px rgba(23, 73, 114, 0.25);
+}
+
+.mc-rating-card--survey .mc-rating-icon {
+  background: linear-gradient(135deg, var(--teal), var(--primary-light));
+  box-shadow: 0 6px 16px rgba(15, 186, 214, 0.3);
+}
+
+.mc-rating-eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.mc-rating-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: 0.15rem;
+}
+
+.mc-rating-body {
+  text-align: center;
+}
+
+/* ── Stars ────────────────────────────────────────────────────────────── */
+.mc-stars {
+  display: inline-flex;
+  gap: 0.35rem;
+  font-size: 1.85rem;
+  color: #F5B400;
+  filter: drop-shadow(0 1px 2px rgba(245, 180, 0, 0.25));
+  margin-bottom: 0.75rem;
+}
+
+.mc-stars .bi {
+  line-height: 1;
+}
+
+.mc-rating-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.mc-rating-number {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  color: var(--primary-dark);
+  line-height: 1;
+}
+
+.mc-rating-out {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 1.15rem;
+  color: var(--text-light);
+}
+
+.mc-rating-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ── Verification strip ───────────────────────────────────────────────── */
+.mc-verify-strip {
+  margin-top: 3rem;
+  padding: 1.75rem 2rem;
+  background: var(--bg-white);
+  border-radius: 16px;
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.mc-verify-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+.mc-verify-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.mc-verify-item .bi {
+  font-size: 1.4rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.mc-verify-item strong {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 1.2;
+}
+
+.mc-verify-item span {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--primary-dark);
+}
+
+.mc-verify-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--gray-200);
+}
+
+.mc-verify-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 1.4rem;
+  border-radius: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: white;
+  background: var(--gradient-primary);
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 12px rgba(23, 73, 114, 0.25);
+  white-space: nowrap;
+}
+
+.mc-verify-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(23, 73, 114, 0.35);
+  color: white;
+  text-decoration: none;
+}
+
+/* ── Services note ────────────────────────────────────────────────────── */
+.mc-services-note {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  padding: 1.4rem 1.6rem;
+  background: linear-gradient(135deg, rgba(23,148,211,0.06), rgba(15,186,214,0.04));
+  border-left: 4px solid var(--primary);
+  border-radius: 12px;
+}
+
+.mc-services-note-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+}
+
+.mc-services-note-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.mc-services-note-body strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.mc-inline-cta {
+  display: inline-flex;
+  align-items: center;
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.mc-inline-cta:hover {
+  color: var(--primary-dark);
+  border-bottom-color: var(--primary-dark);
+  text-decoration: none;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .medicare-ratings-section {
+    padding: 3rem 0;
+  }
+  .mc-rating-card {
+    padding: 1.5rem;
+  }
+  .mc-rating-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+  .mc-rating-number {
+    font-size: 2.1rem;
+  }
+  .mc-stars {
+    font-size: 1.6rem;
+  }
+  .mc-verify-strip {
+    padding: 1.4rem 1.25rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .mc-verify-content {
+    justify-content: center;
+    gap: 1.25rem;
+  }
+  .mc-verify-divider {
+    display: none;
+  }
+  .mc-verify-cta {
+    justify-content: center;
+  }
+  .mc-services-note {
+    flex-direction: column;
+    text-align: left;
+  }
+}
